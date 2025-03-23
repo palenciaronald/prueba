@@ -28,6 +28,7 @@ st.title("📊 Calificación Crediticia + Cluster de Riesgo")
 st.header("🧾 Datos del Cliente")
 
 entrada = {}
+###nj
 
 # Inputs numéricos
 entrada['Numero Creditos Vigentes'] = st.number_input("Número Créditos Vigentes", value=0)
