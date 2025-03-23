@@ -1,0 +1,94 @@
+\section{ Medidas de bondad de ajuste}
+
+\subsection{Error Cuadrático Medio (MSE)}
+
+El Error Cuadrático Medio (MSE) es una medida que permite observar la desviación al cuadrado de los valores estimados o pronosticados por un modelo respecto a los valores reales. Adicionalmente, a diferencia de otras medidas de error como el ME o el MAE, el MSE penaliza errores extremos ocurridos durante el proceso de estimación, puesto que, al ser una medida cuadrática, los errores grandes de estimación obtienen un peso mucho mayor que los errores pequeños. La ecuación del MSE está dada por:
+
+\[
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (e_i)^2
+\]
+
+donde \( e_i \) es el error de estimación de la \( i \)-ésima observación y \( n \) es el número total de observaciones evaluadas.
+
+En este caso se tendrá que el MSE de un modelo, será mejor entre más pequeño sea su valor, por tanto, se buscará aquel modelo que minimice el MSE, en donde entre más cercano a cero se encuentre esta medida indicará que es mejor el modelo planteado.
+
+\subsection{Error Absoluto Medio (MAE)}
+
+El Error Absoluto Medio (MAE) o también denominado como Desviación Absoluta Media (MAD), mide la desviación absoluta promedio de los valores estimados respecto a los valores reales, y por tanto, muestra la magnitud del error general ocurrido dentro del proceso de estimación. Dado que en el MAE los efectos de los errores positivos y negativos no se anulan, entonces no es posible observar el sesgo que tendrán las estimaciones realizadas. La ecuación para el cálculo del MAE está dada por:
+
+\[
+\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |e_i|
+\]
+
+donde \( e_i \) es el error de estimación de la \( i \)-ésima observación y \( n \) es el número total de observaciones evaluadas.
+
+Como lo señalan Hastie y Tibshirani (2017), esta medida disminuye con el número de variables del modelo en la muestra de entrenamiento del modelo, más no en la muestra de validación. Por lo tanto, no es una buena medida para seleccionar entre modelos donde la variable dependiente es la misma, pero el número de variables explicativas es distinto, ya que siempre ganará el modelo con más variables o términos. Sin embargo, para evaluar el desempeño predictivo de un modelo, es una buena medida, ya que el poder predictivo no depende del número de variables o términos en un modelo. De esta forma, entre más pequeño sea el MAE, mejor poder predictivo tiene el modelo.
+
+
+\subsection{Coeficiente de Determinación (\( R^2 \))}
+
+El Coeficiente de Determinación (\( R^2 \)) es una medida de bondad de ajuste que permite evaluar la proporción de la variabilidad de la variable dependiente que es explicada por el modelo estadístico. Este coeficiente varía entre 0 y 1, donde valores cercanos a 1 indican que el modelo explica una mayor proporción de la variabilidad de los datos, mientras que valores cercanos a 0 sugieren que el modelo tiene un bajo poder explicativo, siempre y cuando se tenga en cuenta la parsimonia y la relevancia de las variables incluidas en el modelo.
+
+La ecuación para el cálculo del \( R^2 \) está dada por:
+
+\[
+R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
+\]
+
+donde:
+- \( y_i \) es la \( i \)-ésima observación real,
+- \( \hat{y}_i \) es la \( i \)-ésima estimación obtenida por el modelo ajustado,
+- \( \bar{y} \) es la media de las observaciones reales,
+- \( n \) es el número total de observaciones evaluadas.
+
+Su interpretación debe realizarse con cuidado cuando se comparan modelos con diferentes escalas, además, el \( R^2 \) no penaliza la inclusión de variables adicionales en el modelo, lo que puede llevar a un aumento artificial de su valor incluso cuando las variables añadidas no aportan información relevante por eso es común utilizar versiones ajustadas del \( R^2 \), como el \( R^2 \) ajustado, que tiene en cuenta el número de variables explicativas en el modelo.
+
+
+
+\subsection{Métricas para clasificación}
+
+\subsection{Exactitud (Accuracy)}
+
+El Accuracy  evalúa la proporción de predicciones correctas que realiza un modelo respecto al total de predicciones, es útil en clasificación, donde se quiere determinar cuántas veces el modelo acierta en sus predicciones. La ecuación para el cálculo de la exactitud está dada por:
+
+\[
+\text{Exactitud} = \frac{\text{Número\ de\ predicciones\ correctas}}{\text{Número\ total\ de\ predicciones}}
+\]
+
+donde las predicciones correctas incluyen los verdaderos positivos (VP) junto con los verdaderos negativos (VN), y donde el total de predicciones incluye todas las predicciones que fueron realizadas por el modelo (VP, VN, falsos positivos (FP) y falsos negativos (FN)).
+
+Es una métrica sencilla de interpretar, pero puede ser engañosa cuando las clases están desbalanceadas como por ejemplo si una clase es mucho más frecuente que la otra, un modelo que siempre prediga la clase mayoritaria podría tener una alta exactitud, pero un bajo desempeño real, por lo tanto es recomendable complementarla con otras métricas como la precisión, el recall y el F1-Score.
+
+\subsection{Precisión (Precision)}
+
+La Precisión mide la proporción de predicciones clasificadas como positivas por el modelo que son realmente positivas, por lo tanto es útil donde los falsos positivos tienen un alto costo, como en la detección de fraudes o en diagnósticos médicos. La ecuación para el cálculo de la precisión está dada por:
+
+\[
+\text{Precisión} = \frac{\text{Verdaderos\ Positivos}}{\text{Verdaderos\ Positivos} + \text{Falsos\ Positivos}}
+\]
+
+donde los Verdaderos Positivos (VP) son las predicciones correctas obtenidas en la clase positiva, y los Falsos Positivos (FP) son las predicciones incorrectas que se obtienen en la misma clase positiva.
+
+
+
+\subsection{Recall (Sensibilidad)}
+
+El Recall mide la proporción de casos positivos que el modelo es capaz de identificar correctamente, incluso si esto implica un aumento en los falsos positivos, es importante cuando se quiere identificar la mayor cantidad de casos positivos posibles, como en la detección de enfermedades o en la identificación de amenazas de seguridad. La ecuación para el cálculo del recall está dada por:
+
+\[
+\text{Recall} = \frac{\text{Verdaderos\ Positivos}}{\text{Verdaderos\ Positivos} + \text{Falsos\ Negativos}}
+\]
+
+donde los Verdaderos Positivos (VP) son las predicciones correctas obtenidas en la clase positiva, y donde los Falsos Negativos (FN) son los casos positivos que el modelo no logró identificar.
+
+
+
+\subsection{F1-Score}
+
+El F1-Score combina la precisión y el recall en un solo valor, obteniendose un balance entre ambas medidas, su resultado varía entre 0 y 1, donde valores cercanos a 1 indican un mejor equilibrio entre la precisión y el recall, es importante en las situaciones donde hay un desbalance entre las clases o cuando tanto los falsos positivos como los falsos negativos tienen un costo significativo. La ecuación para el cálculo del F1-Score está dada por:
+
+\[
+\text{F1-Score} = 2 \cdot \frac{\text{Precisión} \cdot \text{Recall}}{\text{Precisión} + \text{Recall}}
+\]
+
+donde la Precisión mide la proporción de predicciones positivas que fueron correctamente identificadas, mientras que el Recall mide la proporción de casos positivos que se identificaron correctamente.

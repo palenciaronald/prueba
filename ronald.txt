@@ -1,0 +1,35 @@
+###Modelo Random Forest
+
+Propuesto por Breiman (2001), es una técnica de aprendizaje automático que se basa en la combinación de múltiples árboles de decisión lo cual disminuye el riesgo de sobreajuste que suele presentarse en los árboles de decisión individuales, aquí cada árbol se entrena con una muestra aleatoria del conjunto de datos original la cual se selecciona mediante el método de bootstrapping para mejorar su precisión predictiva, haciendolo capaz de capturar relaciones no lineales entre las variables dependientes e independientes sin necesidad de especificarle una forma funcional a priori, sin embargo aunque mide la importancia de cada variable explicativa facilitando la interpretación del modelo, la estructura interna del bosque es difícil de interpretar en comparación con modelos más simples como la regresión lineal, también el costo computacional puede ser alto, especialmente cuando se trabaja con grandes volúmenes de datos o un número elevado de árboles. A pesar de esto, al manejar datos faltantes de manera efectiva y al ser menos sensible a valores atípicos lo convierte en uno de los modelos de mayor robustez. 
+
+La predicción final del modelo se obtiene promediando las predicciones de todos los árboles en el caso de problemas de regresión o mediante votación mayoritaria en el caso de problemas de clasificación.
+
+Considere que \( \hat{y}_i^{(b)} \) es la predicció n del \( b \)-ésimo árbol para la observación \( i \), la predicción final del Random Forest \( \hat{y}_i \) se calcula:
+
+\[
+\hat{y}_i = \frac{1}{B} \sum_{b=1}^{B} \hat{y}_i^{(b)}
+\]
+
+donde \( B \) es el número total de árboles en el bosque.
+
+
+
+
+---
+
+### Modelo K-Means
+
+Es una técnica de aprendizaje no supervisado desarrollada por MacQueen (1967), en la cual se divide un conjunto de datos en \( K \) grupos o clusters buscando que los elementos dentro de cada grupo sean lo más similares posible entre sí, pero que los elementos de diferentes grupos sean lo más distintos posible, brindando simplicidad a la hora de implementarse y comprenderse, haciendolo adecuado para la mayoría de aplicaciones pues también tiene una alta ficiencia computacional al converger rápidamente, en epecial para conjuntos de datos de tamaño moderado, además es un modelo escalable capaz de manejar grandes volúmenes de datos, aunque su rendimiento puede verse afectado en dimensiones muy altas.
+
+
+Así dado un conjunto de datos \( X = \{x_1, x_2, \dots, x_n\} \), donde cada \( x_i \) es un vector de características, el objetivo del algoritmo K-Means es encontrar \( K \) centroides \( \mu_1, \mu_2, \dots, \mu_K \) que minimicen la siguiente función de costo:
+
+\[
+J = \sum_{i=1}^{n} \sum_{k=1}^{K} r_{ik} \| x_i - \mu_k \|^2
+\]
+
+donde \( r_{ik} \) es una variable binaria que indica si la observación \( x_i \) pertenece al cluster \( k \) (\( r_{ik} = 1 \)) o no (\( r_{ik} = 0 \)), y \( \| x_i - \mu_k \|^2 \) es la distancia euclidiana entre la observación \( x_i \) y el centroide \( \mu_k \).
+
+El modelo sigue un proceso iterativo que consiste en dos pasos principales, el primero consiste en asignar cada observación \( x_i \) al cluster cuyo centroide \( \mu_k \) esté más cercano y el segundo es la actualización donde se recalcula la posición de los centroides como la media de todas las observaciones que son asignadas a cada cluster, repitiendose este proceso hasta que los centroides ya no cambian significativamente o hasta que se alcanza un número máximo de iteraciones.
+
+Es un modelo que presenta una alta sensibilidad ante la elección de los centroides iniciales ya que se asume que los clusters son esféricos y de tamaño similar, lo que puede afectar significativamente el resultado final, llevando a soluciones subóptimas en especial para datos con formas más complejas, además que el valor de \( K \) debe ser especificado a priori, lo que puede ser complicado cuando no se posee un conocimiento previo sobre la estructura de los datos.
